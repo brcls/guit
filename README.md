@@ -1,50 +1,41 @@
-
 ---
 
 ## Summary
 
 1. [**System Description**](#system-description)
-
-- [**Key System Features**](#a-key-system-features)
-- [**System Context**](#b-system-context)
-- [**Potential Stakeholders**](#c-potential-stakeholders)
-- [**Existing Similar Systems and Differentiation**](#d-existing-similar-systems-and-differentiation)
+   - [**Key System Features**](#a-key-system-features)
+   - [**System Context**](#b-system-context)
+   - [**Potential Stakeholders**](#c-potential-stakeholders)
+   - [**Existing Similar Systems and Differentiation**](#d-existing-similar-systems-and-differentiation)
 
 2. [**System Requirements**](#system-requirements)
-
-- [**ISO/IEC 25010 Quality Attributes**](#a-isoiec-25010-quality-attributes)
-- [**Requirements Elicitation Techniques**](#b-requirements-elicitation-techniques)
-- [**Requirements Document**](#c-requirements-document)
+   - [**ISO/IEC 25010 Quality Attributes**](#a-isoiec-25010-quality-attributes)
+   - [**Requirements Elicitation Techniques**](#b-requirements-elicitation-techniques)
+   - [**Requirements Document**](#c-requirements-document)
 
 3. [**User Stories**](#user-stories)
-
-- [**Custom Trip Creation**](#1-custom-trip-creation)
-- [**Intelligent Navigation**](#2-intelligent-navigation)
-- [**Reviews and Recommendations**](#3-reviews-and-recommendations)
-- [**Personalized Experience**](#4-personalized-experience)
-- [**Alerts and Notifications**](#5-alerts-and-notifications)
-- [**Trip Sharing**](#6-trip-sharing)
-- [**Detailed Information**](#7-detailed-information)
-- [**Dietary Preferences and Restrictions**](#8-dietary-preferences-and-restrictions)
-- [**Trip Summary**](#9-trip-summary)
-- [**User Feedback**](#10-user-feedback)
+   - [**Gitflow Visualization**](#1-gitflow-visualization)
+   - [**Conventional Commit Assistance**](#2-conventional-commit-assistance)
+   - [**Branch Management**](#3-branch-management)
+   - [**Git Command Integration**](#4-git-command-integration)
+   - [**Cross-Platform Support**](#5-cross-platform-support)
+   - [**User Interface Responsiveness**](#6-user-interface-responsiveness)
+   - [**Security of Credentials**](#7-security-of-credentials)
 
 4. [**Actors and Use Cases**](#actors-and-use-cases)
-
-- [**Actors**](#a-actors)
-- [**Use Cases**](#b-use-cases)
-- [**Use Case Diagram Explanation**](#c-use-case-diagram-explanation)
+   - [**Actors**](#a-actors)
+   - [**Use Cases**](#b-use-cases)
+   - [**Use Case Diagram Explanation**](#c-use-case-diagram-explanation)
 
 5. [**MVP (Minimum Viable Product)**](#mvp-minimum-viable-product)
-
-- [**MVP to be Built**](#a-mvp-to-be-built)
-- [**Features Available in the MVP**](#b-features-available-in-the-mvp)
-- [**Potential Customer Reach**](#c-potential-customer-reach)
+   - [**MVP to be Built**](#a-mvp-to-be-built)
+   - [**Features Available in the MVP**](#b-features-available-in-the-mvp)
+   - [**Potential Customer Reach**](#c-potential-customer-reach)
 
 6. [**A/B Testing**](#ab-testing)
-- [**A/B Testing Application Scenario**](#a-ab-testing-application-scenario)
-- [**Versions A and B and A/B Test Execution**](#b-versions-a-and-b-and-ab-test-execution)
-- [**Metrics to be Used**](#c-metrics-to-be-used)
+   - [**A/B Testing Application Scenario**](#a-ab-testing-application-scenario)
+   - [**Versions A and B and A/B Test Execution**](#b-versions-a-and-b-and-ab-test-execution)
+   - [**Metrics to be Used**](#c-metrics-to-be-used)
 
 ---
 
