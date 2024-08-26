@@ -1,0 +1,13 @@
+[package]
+name = "guit"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wgpu = "22.1.0"
+winit = "0.30.5"
+git2 = "0.19.0"
+tokio = { version = "1.39.3", features = ["full"] }
+rayon = "1.10.0"
+bytemuck = "1.17.0"
+metal = "0.29.0" 
