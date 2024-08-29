@@ -1,22 +1,14 @@
-use std::{cell::RefCell, rc::Rc};
-
 use gpui::*;
 
 struct HelloWorld {
-    selected_tab: Rc<RefCell<String>>,
-}
-
-impl HelloWorld {
-    fn on_click(&self, tab_name: String) {
-        *self.selected_tab.borrow_mut() = tab_name;
-    }
+    selected_tab: Model<String>,
 }
 
 impl Render for HelloWorld {
-    fn render(&mut self, _cx: &mut ViewContext<Self>) -> impl IntoElement {
-        let selected_tab = self.selected_tab.clone();
+    fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement {
+        let selected_tab = self.selected_tab.read(cx);
 
-        let tab_content = match selected_tab.borrow().as_str() {
+        let tab_content = match selected_tab.as_str() {
             "commit" => div()
                 .h_full()
                 .m_2()
@@ -79,13 +71,6 @@ impl Render for HelloWorld {
             _ => div().child("Select a tab"),
         };
 
-        let on_click = {
-            let selected_tab = selected_tab.clone();
-            move |tab_name: String| {
-                *selected_tab.borrow_mut() = tab_name;
-            }
-        };
-
         div()
             .bg(rgb(0x202020))
             .size_full()
@@ -114,9 +99,11 @@ impl Render for HelloWorld {
                             .child("commit")
                             .hover(|style| style.bg(rgb(0x282828)).cursor_pointer())
                             .on_mouse_down(MouseButton::Left, {
-                                let on_click = on_click.clone();
-                                move |_, _cx| {
-                                    on_click("commit".to_string());
+                                let model = self.selected_tab.clone();
+                                move |_, cx: &mut WindowContext| {
+                                    cx.update_model(&model, |tab, _| {
+                                        *tab = "commit".to_string();
+                                    });
                                 }
                             }),
                         div()
@@ -132,9 +119,11 @@ impl Render for HelloWorld {
                             .child("branches")
                             .hover(|style| style.bg(rgb(0x282828)).cursor_pointer())
                             .on_mouse_down(MouseButton::Left, {
-                                let on_click = on_click.clone();
-                                move |_, _cx| {
-                                    on_click("branches".to_string());
+                                let model = self.selected_tab.clone();
+                                move |_, cx: &mut WindowContext| {
+                                    cx.update_model(&model, |tab, _| {
+                                        *tab = "branches".to_string();
+                                    });
                                 }
                             }),
                         div()
@@ -150,9 +139,11 @@ impl Render for HelloWorld {
                             .child("history")
                             .hover(|style| style.bg(rgb(0x282828)).cursor_pointer())
                             .on_mouse_down(MouseButton::Left, {
-                                let on_click = on_click.clone();
-                                move |_, _cx| {
-                                    on_click("history".to_string());
+                                let model = self.selected_tab.clone();
+                                move |_, cx: &mut WindowContext| {
+                                    cx.update_model(&model, |tab, _| {
+                                        *tab = "history".to_string();
+                                    });
                                 }
                             }),
                         div()
@@ -168,9 +159,11 @@ impl Render for HelloWorld {
                             .child("flow")
                             .hover(|style| style.bg(rgb(0x282828)).cursor_pointer())
                             .on_mouse_down(MouseButton::Left, {
-                                let on_click = on_click.clone();
-                                move |_, _cx| {
-                                    on_click("flow".to_string());
+                                let model = self.selected_tab.clone();
+                                move |_, cx: &mut WindowContext| {
+                                    cx.update_model(&model, |tab, _| {
+                                        *tab = "flow".to_string();
+                                    });
                                 }
                             }),
                     ]),
@@ -182,8 +175,8 @@ impl Render for HelloWorld {
 fn main() {
     App::new().run(|cx: &mut AppContext| {
         cx.open_window(WindowOptions::default(), |cx| {
-            cx.new_view(|_cx| HelloWorld {
-                selected_tab: Rc::new(RefCell::new("commit".to_string())),
+            cx.new_view(|cx| HelloWorld {
+                selected_tab: cx.new_model(|_| "commit".to_string()),
             })
         })
         .unwrap();
