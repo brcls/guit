@@ -21,10 +21,50 @@ impl Render for HelloWorld {
                     .p_2()
                     .gap_2()
                     .children([
-                        div().w_full().rounded_xl().h_10().bg(rgb(0x202020)),
-                        div().w_full().rounded_xl().h_10().bg(rgb(0x202020)),
-                        div().w_full().rounded_xl().h_10().bg(rgb(0x202020)),
-                        div().w_full().rounded_xl().h_10().bg(rgb(0x202020)),
+                        div()
+                            .w_full()
+                            .flex()
+                            .text_sm()
+                            .px_4()
+                            .items_center()
+                            .justify_center()
+                            .rounded_xl()
+                            .h_10()
+                            .bg(rgb(0x202020))
+                            .child("commit"),
+                        div()
+                            .w_full()
+                            .flex()
+                            .text_sm()
+                            .px_4()
+                            .items_center()
+                            .justify_center()
+                            .rounded_xl()
+                            .h_10()
+                            .bg(rgb(0x202020))
+                            .child("branches"),
+                        div()
+                            .w_full()
+                            .flex()
+                            .text_sm()
+                            .px_4()
+                            .items_center()
+                            .justify_center()
+                            .rounded_xl()
+                            .h_10()
+                            .bg(rgb(0x202020))
+                            .child("history"),
+                        div()
+                            .w_full()
+                            .flex()
+                            .text_sm()
+                            .px_4()
+                            .items_center()
+                            .justify_center()
+                            .rounded_xl()
+                            .h_10()
+                            .bg(rgb(0x202020))
+                            .child("flow"),
                     ]),
                 div()
                     .h_full()
@@ -46,7 +86,7 @@ impl Render for HelloWorld {
                             .rounded_xl()
                             .h_10()
                             .bg(rgb(0x202020))
-                            .child(format!("Hello, {}!", &self.text)),
+                            .child("file.rs"),
                         div()
                             .w_full()
                             .flex()
@@ -56,7 +96,7 @@ impl Render for HelloWorld {
                             .rounded_xl()
                             .h_10()
                             .bg(rgb(0x202020))
-                            .child(format!("Hello, {}!", &self.text)),
+                            .child("file.rs"),
                         div()
                             .w_full()
                             .flex()
@@ -66,7 +106,7 @@ impl Render for HelloWorld {
                             .rounded_xl()
                             .h_10()
                             .bg(rgb(0x202020))
-                            .child(format!("Hello, {}!", &self.text)),
+                            .child("file.rs"),
                         div()
                             .w_full()
                             .flex()
@@ -76,7 +116,7 @@ impl Render for HelloWorld {
                             .rounded_xl()
                             .h_10()
                             .bg(rgb(0x202020))
-                            .child(format!("Hello, {}!", &self.text)),
+                            .child("file.rs"),
                     ]),
             ])
     }
