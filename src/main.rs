@@ -1,9 +1,11 @@
 mod components;
 mod pages;
 
+use std::borrow::Borrow;
+
 use branches_page::BranchesPage;
 use commit_page::CommitPage;
-use components::header::Header;
+use components::header::{self, Header};
 use flow_page::FlowPage;
 use gpui::*;
 use history_pages::HistoryPage;
@@ -34,12 +36,19 @@ struct Main {
 impl Render for Main {
     fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement {
         let selected_tab = self.selected_tab.read(cx);
+        let header = Header {
+            selected_tab: self.selected_tab.clone(),
+        };
+        let commit = Page::Commit(CommitPage);
+        let branches = Page::Branches(BranchesPage);
+        let history = Page::History(HistoryPage);
+        let flow = Page::Flow(FlowPage);
 
         let tab_content = match selected_tab.as_str() {
-            "commit" => Page::Commit(CommitPage),
-            "branches" => Page::Branches(BranchesPage),
-            "history" => Page::History(HistoryPage),
-            "flow" => Page::Flow(FlowPage),
+            "commit" => commit,
+            "branches" => branches,
+            "history" => history,
+            "flow" => flow,
             _ => Page::Commit(CommitPage),
         };
 
@@ -48,9 +57,7 @@ impl Render for Main {
             .size_full()
             .text_xl()
             .text_color(rgb(0xffffff))
-            .child(Header {
-                selected_tab: self.selected_tab.clone(),
-            })
+            .child(header)
             .child(tab_content.render(cx))
     }
 }
