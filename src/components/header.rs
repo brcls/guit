@@ -8,7 +8,7 @@ pub struct HeaderButton {
 
 impl RenderOnce for HeaderButton {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
-        div()
+        return div()
             .w_full()
             .flex()
             .text_sm()
@@ -27,7 +27,7 @@ impl RenderOnce for HeaderButton {
                         *tab = self.text.clone();
                     });
                 }
-            })
+            });
     }
 }
 
@@ -38,6 +38,20 @@ pub struct Header {
 
 impl RenderOnce for Header {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+        let commit_button = HeaderButton {
+            selected_tab: self.selected_tab.clone(),
+            text: "commit".to_string(),
+        };
+
+        let branches_button = HeaderButton {
+            selected_tab: self.selected_tab.clone(),
+            text: "branches".to_string(),
+        };
+        let history_button = HeaderButton {
+            selected_tab: self.selected_tab.clone(),
+            text: "history".to_string(),
+        };
+
         return div()
             .w_full()
             .flex()
@@ -47,19 +61,6 @@ impl RenderOnce for Header {
             .p_2()
             .gap_2()
             .child(div().font_weight(FontWeight(900.0)).child("guit").mx_4())
-            .children([
-                HeaderButton {
-                    selected_tab: self.selected_tab.clone(),
-                    text: "commit".to_string(),
-                },
-                HeaderButton {
-                    selected_tab: self.selected_tab.clone(),
-                    text: "branches".to_string(),
-                },
-                HeaderButton {
-                    selected_tab: self.selected_tab.clone(),
-                    text: "history".to_string(),
-                },
-            ]);
+            .children([commit_button, branches_button, history_button]);
     }
 }
