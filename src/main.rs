@@ -1,11 +1,9 @@
 mod components;
 mod pages;
 
-use std::borrow::Borrow;
-
 use branches_page::BranchesPage;
 use commit_page::CommitPage;
-use components::header::{self, Header};
+use components::header::Header;
 use flow_page::FlowPage;
 use gpui::*;
 use history_page::HistoryPage;
@@ -19,12 +17,12 @@ enum Page {
 }
 
 impl RenderOnce for Page {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _: &mut WindowContext) -> impl IntoElement {
         match self {
-            Page::Commit(page) => page.render(cx).into_any_element(),
-            Page::Branches(page) => page.render(cx).into_any_element(),
-            Page::History(page) => page.render(cx).into_any_element(),
-            Page::Flow(page) => page.render(cx).into_any_element(),
+            Page::Commit(page) => page.into_any_element(),
+            Page::Branches(page) => page.into_any_element(),
+            Page::History(page) => page.into_any_element(),
+            Page::Flow(page) => page.into_any_element(),
         }
     }
 }
@@ -36,21 +34,20 @@ struct Tabs {
 impl RenderOnce for Tabs {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         let selected_tab = self.selected_tab.read(cx).as_str();
-
         let commit = Page::Commit(CommitPage);
         let branches = Page::Branches(BranchesPage);
         let history = Page::History(HistoryPage);
         let flow = Page::Flow(FlowPage);
 
         let tab_content = match selected_tab {
-            "commit" => commit.render(cx),
-            "branches" => branches.render(cx),
-            "history" => history.render(cx),
-            "flow" => flow.render(cx),
-            _ => Page::Commit(CommitPage).render(cx),
+            "commit" => commit,
+            "branches" => branches,
+            "history" => history,
+            "flow" => flow,
+            _ => Page::Commit(CommitPage),
         };
 
-        return tab_content;
+        return tab_content.render(cx);
     }
 }
 

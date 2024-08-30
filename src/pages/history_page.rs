@@ -5,7 +5,7 @@ use gpui::*;
 pub struct HistoryPage;
 
 impl RenderOnce for HistoryPage {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         return div()
             .h_full()
             .m_2()

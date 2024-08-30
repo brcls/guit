@@ -4,7 +4,7 @@ use gpui::*;
 pub struct ListItem;
 
 impl RenderOnce for ListItem {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         return div()
             .w_full()
             .flex()

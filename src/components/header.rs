@@ -7,7 +7,7 @@ pub struct HeaderButton {
 }
 
 impl RenderOnce for HeaderButton {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         return div()
             .w_full()
             .flex()
@@ -37,7 +37,7 @@ pub struct Header {
 }
 
 impl RenderOnce for Header {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         let commit_button = HeaderButton {
             selected_tab: self.selected_tab.clone(),
             text: "commit".to_string(),

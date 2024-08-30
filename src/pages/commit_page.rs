@@ -6,7 +6,7 @@ use crate::components::list_item::ListItem; // Importa o ListItem do módulo com
 pub struct CommitPage;
 
 impl RenderOnce for CommitPage {
-    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+    fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         return div()
             .size_full()
             .w_1_3()
