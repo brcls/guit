@@ -15,6 +15,7 @@ impl RenderOnce for FlowPage {
             .gap_2()
             .flex()
             .flex_col()
-            .bg(rgb(0x181818));
+            .bg(rgb(0x181818))
+            .child("flow");
     }
 }

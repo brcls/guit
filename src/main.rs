@@ -8,7 +8,7 @@ use commit_page::CommitPage;
 use components::header::{self, Header};
 use flow_page::FlowPage;
 use gpui::*;
-use history_pages::HistoryPage;
+use history_page::HistoryPage;
 use pages::*;
 
 enum Page {
@@ -45,11 +45,11 @@ impl Render for Main {
         let flow = Page::Flow(FlowPage);
 
         let tab_content = match selected_tab.as_str() {
-            "commit" => commit,
-            "branches" => branches,
-            "history" => history,
-            "flow" => flow,
-            _ => Page::Commit(CommitPage),
+            "commit" => commit.render(cx),
+            "branches" => branches.render(cx),
+            "history" => history.render(cx),
+            "flow" => flow.render(cx),
+            _ => Page::Commit(CommitPage).render(cx),
         };
 
         div()
@@ -58,7 +58,7 @@ impl Render for Main {
             .text_xl()
             .text_color(rgb(0xffffff))
             .child(header)
-            .child(tab_content.render(cx))
+            .child(tab_content)
     }
 }
 
