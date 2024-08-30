@@ -1,66 +1,38 @@
 use gpui::*;
 
-#[derive(IntoElement)]
+use crate::components::list_item::ListItem; // Importa o ListItem do módulo components
 
+#[derive(IntoElement)]
 pub struct CommitPage;
 
 impl RenderOnce for CommitPage {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         return div()
-            .h_full()
-            .m_2()
-            .rounded_xl()
+            .size_full()
             .w_1_3()
-            .p_2()
-            .gap_2()
-            .flex()
-            .flex_col()
-            .bg(rgb(0x181818))
-            .children([
+            .child(
                 div()
-                    .w_full()
-                    .flex()
-                    .text_sm()
-                    .px_4()
-                    .items_center()
+                    .h_auto()
+                    .m_2()
                     .rounded_xl()
-                    .h_10()
-                    .bg(rgb(0x202020))
-                    .child("file.rs")
-                    .hover(|style| style.bg(rgb(0x282828)).cursor_pointer()),
+                    .p_2()
+                    .gap_2()
+                    .flex()
+                    .flex_col()
+                    .bg(rgb(0x181818))
+                    .children([ListItem, ListItem, ListItem]),
+            )
+            .child(
                 div()
-                    .w_full()
-                    .flex()
-                    .text_sm()
-                    .px_4()
-                    .items_center()
+                    .h_auto()
+                    .m_2()
                     .rounded_xl()
-                    .h_10()
-                    .bg(rgb(0x202020))
-                    .child("file.rs")
-                    .hover(|style| style.bg(rgb(0x282828)).cursor_pointer()),
-                div()
-                    .w_full()
+                    .p_2()
+                    .gap_2()
                     .flex()
-                    .text_sm()
-                    .px_4()
-                    .items_center()
-                    .rounded_xl()
-                    .h_10()
-                    .bg(rgb(0x202020))
-                    .child("file.rs")
-                    .hover(|style| style.bg(rgb(0x282828)).cursor_pointer()),
-                div()
-                    .w_full()
-                    .flex()
-                    .text_sm()
-                    .px_4()
-                    .items_center()
-                    .rounded_xl()
-                    .h_10()
-                    .bg(rgb(0x202020))
-                    .child("file.rs")
-                    .hover(|style| style.bg(rgb(0x282828)).cursor_pointer()),
-            ]);
+                    .flex_col()
+                    .bg(rgb(0x181818))
+                    .children([ListItem, ListItem, ListItem]),
+            );
     }
 }
