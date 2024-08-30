@@ -29,27 +29,42 @@ impl RenderOnce for Page {
     }
 }
 
+struct Tabs {
+    selected_tab: Model<String>,
+}
+
+impl RenderOnce for Tabs {
+    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+        let selected_tab = self.selected_tab.read(cx).as_str();
+
+        let commit = Page::Commit(CommitPage);
+        let branches = Page::Branches(BranchesPage);
+        let history = Page::History(HistoryPage);
+        let flow = Page::Flow(FlowPage);
+
+        let tab_content = match selected_tab {
+            "commit" => commit.render(cx),
+            "branches" => branches.render(cx),
+            "history" => history.render(cx),
+            "flow" => flow.render(cx),
+            _ => Page::Commit(CommitPage).render(cx),
+        };
+
+        return tab_content;
+    }
+}
+
 struct Main {
     selected_tab: Model<String>,
 }
 
 impl Render for Main {
     fn render(&mut self, cx: &mut ViewContext<Self>) -> impl IntoElement {
-        let selected_tab = self.selected_tab.read(cx);
         let header = Header {
             selected_tab: self.selected_tab.clone(),
         };
-        let commit = Page::Commit(CommitPage);
-        let branches = Page::Branches(BranchesPage);
-        let history = Page::History(HistoryPage);
-        let flow = Page::Flow(FlowPage);
-
-        let tab_content = match selected_tab.as_str() {
-            "commit" => commit.render(cx),
-            "branches" => branches.render(cx),
-            "history" => history.render(cx),
-            "flow" => flow.render(cx),
-            _ => Page::Commit(CommitPage).render(cx),
+        let tabs = Tabs {
+            selected_tab: self.selected_tab.clone(),
         };
 
         div()
@@ -58,7 +73,7 @@ impl Render for Main {
             .text_xl()
             .text_color(rgb(0xffffff))
             .child(header)
-            .child(tab_content)
+            .child(tabs.render(cx))
     }
 }
 
