@@ -9,6 +9,24 @@ use gpui::*;
 use history_pages::HistoryPage;
 use pages::*;
 
+enum Page {
+    Commit(CommitPage),
+    Branches(BranchesPage),
+    History(HistoryPage),
+    Flow(FlowPage),
+}
+
+impl RenderOnce for Page {
+    fn render(self, cx: &mut WindowContext) -> impl IntoElement {
+        match self {
+            Page::Commit(page) => page.render(cx).into_any_element(),
+            Page::Branches(page) => page.render(cx).into_any_element(),
+            Page::History(page) => page.render(cx).into_any_element(),
+            Page::Flow(page) => page.render(cx).into_any_element(),
+        }
+    }
+}
+
 struct Main {
     selected_tab: Model<String>,
 }
@@ -18,11 +36,11 @@ impl Render for Main {
         let selected_tab = self.selected_tab.read(cx);
 
         let tab_content = match selected_tab.as_str() {
-            "commit" => CommitPage.into_any_element(),
-            "branches" => BranchesPage.into_any_element(),
-            "history" => HistoryPage.into_any_element(),
-            "flow" => FlowPage.into_any_element(),
-            _ => CommitPage.into_any_element(),
+            "commit" => Page::Commit(CommitPage),
+            "branches" => Page::Branches(BranchesPage),
+            "history" => Page::History(HistoryPage),
+            "flow" => Page::Flow(FlowPage),
+            _ => Page::Commit(CommitPage),
         };
 
         div()
@@ -33,7 +51,7 @@ impl Render for Main {
             .child(Header {
                 selected_tab: self.selected_tab.clone(),
             })
-            .child(tab_content)
+            .child(tab_content.render(cx))
     }
 }
 
