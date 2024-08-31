@@ -7,6 +7,10 @@ pub struct CommitPage;
 
 impl RenderOnce for CommitPage {
     fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
+        let item = ListItem.into_any_element();
+        let item1 = ListItem.into_any_element();
+        let item2 = ListItem.into_any_element();
+
         return div()
             .size_full()
             .w_1_3()
@@ -20,7 +24,7 @@ impl RenderOnce for CommitPage {
                     .flex()
                     .flex_col()
                     .bg(rgb(0x181818))
-                    .children([ListItem, ListItem, ListItem]),
+                    .children([item, item2]),
             )
             .child(
                 div()
@@ -32,7 +36,7 @@ impl RenderOnce for CommitPage {
                     .flex()
                     .flex_col()
                     .bg(rgb(0x181818))
-                    .children([ListItem, ListItem, ListItem]),
+                    .children([item1]),
             );
     }
 }

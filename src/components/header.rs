@@ -9,6 +9,7 @@ pub struct HeaderButton {
 impl RenderOnce for HeaderButton {
     fn render(self, _cx: &mut WindowContext) -> impl IntoElement {
         return div()
+            .id("header_button")
             .w_full()
             .flex()
             .text_sm()
@@ -20,7 +21,7 @@ impl RenderOnce for HeaderButton {
             .bg(rgb(0x202020))
             .child(self.text.clone())
             .hover(|style| style.bg(rgb(0x282828)).cursor_pointer())
-            .on_mouse_down(MouseButton::Left, {
+            .on_click({
                 let model = self.selected_tab.clone();
                 move |_, cx: &mut WindowContext| {
                     cx.update_model(&model, |tab, _| {
