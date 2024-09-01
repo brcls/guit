@@ -65,7 +65,7 @@ impl Render for Main {
         };
 
         div()
-            .bg(rgb(0x202020))
+            .bg(rgb(0x191919))
             .size_full()
             .text_xl()
             .text_color(rgb(0xffffff))
