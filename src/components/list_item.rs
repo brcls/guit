@@ -13,8 +13,11 @@ impl RenderOnce for ListItem {
             .items_center()
             .rounded_xl()
             .h_10()
-            .bg(rgb(0x202020))
+            .bg(rgb(0x151515))
+            .border_1()
+            .border_color(rgb(0x202020))
             .child("file.rs")
-            .hover(|style| style.bg(rgb(0x282828)).cursor_pointer());
+            .my_4()
+            .hover(|style| style.bg(rgb(0x202020)).cursor_pointer());
     }
 }

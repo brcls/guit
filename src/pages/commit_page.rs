@@ -1,3 +1,5 @@
+use std::process::Child;
+
 use gpui::*;
 
 use crate::components::list_item::ListItem; // Importa o ListItem do módulo components
@@ -35,27 +37,12 @@ impl Render for List {
                 items.push(ListItem);
                 items.push(ListItem);
                 items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
-                items.push(ListItem);
                 return items;
             },
         )
         .id("ListOfCommits")
         .size_full()
-        .overflow_scroll();
+        .gap_2();
     }
 }
 
@@ -66,18 +53,54 @@ impl RenderOnce for CommitPage {
     fn render(self, cx: &mut WindowContext) -> impl IntoElement {
         let list = cx.new_view(|cx: &mut ViewContext<'_, List>| List);
 
-        return div().h_128().w_1_3().child(
-            div()
-                .h_128()
-                .m_2()
-                .rounded_xl()
-                .p_2()
-                .gap_2()
-                .flex()
-                .flex_col()
-                .bg(rgb(0x202020))
-                .child(list)
-                .overflow_y_hidden(),
-        );
+        return div()
+            .size_full()
+            .flex()
+            .items_start()
+            .justify_between()
+            .child(
+                div()
+                    .h_5_6()
+                    .w_2_5()
+                    .rounded_xl()
+                    .gap_2()
+                    .flex()
+                    .flex_col()
+                    .my_4()
+                    .ml_4()
+                    .mr_2()
+                    .child(
+                        div()
+                            .font_weight(FontWeight(900.0))
+                            .child("changes")
+                            .child(
+                                div()
+                                    .child("10")
+                                    .text_size(Pixels(10.0))
+                                    .bg(rgb(0x202020))
+                                    .size_7()
+                                    .flex()
+                                    .items_center()
+                                    .justify_center()
+                                    .rounded_full(),
+                            )
+                            .flex()
+                            .justify_between()
+                            .items_center()
+                            .mx_2()
+                            .text_sm(),
+                    )
+                    .child(list),
+            )
+            .child(
+                div()
+                    .h_5_6()
+                    .w_full()
+                    .bg(rgb(0x202020))
+                    .rounded_xl()
+                    .my_4()
+                    .mr_4()
+                    .ml_2(),
+            );
     }
 }
