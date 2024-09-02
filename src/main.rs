@@ -74,13 +74,36 @@ impl Render for Main {
     }
 }
 
-fn main() {
-    App::new().run(|cx: &mut AppContext| {
-        cx.open_window(WindowOptions::default(), |cx| {
-            cx.new_view(|cx| Main {
-                selected_tab: cx.new_model(|_| "commit".to_string()),
+struct Assets {}
+
+impl AssetSource for Assets {
+    fn load(&self, path: &str) -> Result<Option<std::borrow::Cow<'static, [u8]>>> {
+        std::fs::read(path)
+            .map(Into::into)
+            .map_err(Into::into)
+            .map(|result| Some(result))
+    }
+
+    fn list(&self, path: &str) -> Result<Vec<SharedString>> {
+        Ok(std::fs::read_dir(path)?
+            .filter_map(|entry| {
+                Some(SharedString::from(
+                    entry.ok()?.path().to_string_lossy().to_string(),
+                ))
             })
-        })
-        .unwrap();
-    });
+            .collect::<Vec<_>>())
+    }
+}
+
+fn main() {
+    App::new()
+        .with_assets(Assets {})
+        .run(|cx: &mut AppContext| {
+            cx.open_window(WindowOptions::default(), |cx| {
+                cx.new_view(|cx| Main {
+                    selected_tab: cx.new_model(|_| "commit".to_string()),
+                })
+            })
+            .unwrap();
+        });
 }
